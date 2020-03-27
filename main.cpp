@@ -104,12 +104,12 @@ public:
         if(stanje == PECESE)
         {
             temperatura+=20;
-            if(temperatura < 100)
+            if(temperatura > 100)
             {
-                return true;
-            }else
                 stanje = IZGOREO;
                 temperatura = 20;
+            }
+            return true;
         }else
              return false;
     }
@@ -158,12 +158,66 @@ public:
         cout<<"Temperatura:"<<k.getTemperatura()<<endl;
         cout<<"Preliv:"<<endl;
         ispisiPreliv(k.getPreliv());
+        cout<<"------------------";
     }
+
+int meni()
+{
+    int opcija;
+
+        cout<<"Odaberite operaciju:"<<endl;
+        cout<<"1. Stavite kolac da se pece"<<endl;
+        cout<<"2. Ispecite kolac"<<endl;
+        cout<<"3. Zavrsite sa pecenjem kolacem"<<endl;
+        cout<<"4. Povecajte temperaturu pecenja"<<endl;
+        cout<<"5. Smanjite temperaturu pecenja"<<endl;
+        cout<<"6. Dodajte slag na kolac"<<endl;
+        cout<<"7. Uklonite slag sa kolaca"<<endl;
+        cout<<"8. Zavrsetak rada programa"<<endl;
+        cin>>opcija;
+
+        return opcija;
+}
 
 
 int main()
 {
-    cout << "Hello world!" << endl;
+    int opcijaIzMenija;
+    Kolac kolacic;
+    bool prom;
+
+    do
+    {
+        opcijaIzMenija = meni();
+        switch(opcijaIzMenija)
+        {
+        case 1:
+            prom = kolacic.staviDaSePece();
+            break;
+        case 2:
+            prom = kolacic.ispeciKolac();
+            break;
+        case 3:
+            prom = kolacic.zavrsiKolac();
+            break;
+        case 4:
+            prom = kolacic.povecajTemperaturu();
+            break;
+        case 5:
+            prom = kolacic.smanjiTemperaturu();
+            break;
+        case 6:
+            prom = kolacic.dodajSlag();
+            break;
+        case 7:
+            prom = kolacic.ukloniSlag();
+            break;
+        }
+
+        if(prom == true)
+        {
+            ispisiKolac(kolacic);
+        }
+    }while(opcijaIzMenija>1 && opcijaIzMenija<8 );
     return 0;
 }
-
